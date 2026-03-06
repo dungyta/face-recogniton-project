@@ -114,12 +114,13 @@ def eval(model, model_path=None, device=None):
 
     # Load model
     if model_path is not None:
-        state_dict = torch.load(model_path, map_location=device)
+        checkpoint = torch.load(model_path, map_location=device)  
+        state_dict = checkpoint['model'] if isinstance(checkpoint, dict) and 'model' in checkpoint else checkpoint  
         model.load_state_dict(state_dict)
     model.to(device).eval()
 
     root = 'data/val'
-    with open('data/val/lfw_ann.txt') as f:
+    with open('data/val/calfw_ann.txt') as f:
         pair_lines = f.readlines()[1:]
 
     # Extract features and calculate distances
@@ -136,7 +137,7 @@ def eval(model, model_path=None, device=None):
                 print(f"Skipping invalid line: {line.strip()}")
                 continue
 
-            # Load and preprocess images
+            # Load and preprocess images>
             img1 = Image.open(img1_path).convert('RGB')
             img2 = Image.open(img2_path).convert('RGB')
 
@@ -174,9 +175,14 @@ def eval(model, model_path=None, device=None):
 
 
 if __name__ == '__main__':
-    _, result = eval(sphere20(512).to('cuda'), model_path='weights/sphere20_mcp.pth')
+    # _, result = eval(sphere20(512).to('cuda'), model_path='weights/sphere20_mcp.pth')
     _, result = eval(sphere36(512).to('cuda'), model_path='weights/sphere36_mcp.pth')
-    _, result = eval(MobileNetV1(512).to('cuda'), model_path='weights/mobilenetv1_mcp.pth')
-    _, result = eval(MobileNetV2(512).to('cuda'), model_path='weights/mobilenetv2_mcp.pth')
-    _, result = eval(mobilenet_v3_small(512).to('cuda'), model_path='weights/mobilenetv3_small_mcp.pth')
-    _, result = eval(mobilenet_v3_large(512).to('cuda'), model_path='weights/mobilenetv3_large_mcp.pth')
+    # _, result = eval(MobileNetV1(512).to('cuda'), model_path='weights/mobilenetv1_mcp.pth')
+    # _, result = eval(MobileNetV1(512).to('cuda'), model_path='weights/mobilenetv1_MCP_best.ckpt')
+    # _, result = eval(MobileNetV1(embedding_dim=512, width_mult=0.5).to('cuda'), model_path='weights/mobilenetv1_050_MCP_best.ckpt')
+    # _, result = eval(MobileNetV2(512).to('cuda'), model_path='weights/mobilenetv2_mcp.pth')
+    # _, result = eval(mobilenet_v3_small(512).to('cuda'), model_path='weights/mobilenetv3_small_mcp.pth')
+    # _, result = eval(mobilenet_v3_large(512).to('cuda'), model_path='weights/mobilenetv3_large_mcp.pth')
+    # _, result = eval(mobilenet_v3_large(512).to('cuda'), model_path='weights/mobilenetv3_large_MCP_best.ckpt')
+    # _, result = eval(MobileNetV1(embedding_dim=512, width_mult=0.18).to('cuda'), model_path='weights/mobilenetv1_018.pth')
+    # _, result = eval(MobileNetV1(embedding_dim=512, width_mult=0.25).to('cuda'), model_path='/home/dun/face-recognition/weights/mobilenetv1_0.25_mcp.pth')

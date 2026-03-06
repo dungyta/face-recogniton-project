@@ -29,6 +29,8 @@ def get_network(params):
         model = mobilenet_v3_small(embedding_dim=512)
     elif params.network == "mobilenetv3_large":
         model = mobilenet_v3_large(embedding_dim=512)
+    elif params.network == "mobilenetv2_025":
+        model = MobileNetV2(embedding_dim=512, width_mult=0.25)
     else:
         raise ValueError("Unsupported network!")
 
@@ -52,7 +54,7 @@ def parse_arguments():
             'mobilenetv1', 'mobilenetv1_0.25', 'mobilenetv1_0.50',
             'mobilenetv2', 'mobilenetv3_small', 'mobilenetv3_large',
             'sphere20', 'sphere36', 'sphere64',
-            'resnet50', 'resnet34', 'resnet18'
+            'resnet50', 'resnet34', 'resnet18', 'mobilenetv2_025'
         ],
         help='Backbone network architecture to use'
     )

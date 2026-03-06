@@ -8,7 +8,7 @@ __all__ = ["mobilenet_v1_025", "mobilenet_v1_050", "mobilenet_v1"]
 
 
 class MobileNetV1(nn.Module):
-    def __init__(self, embedding_dim: int = 512, width_mult: float = 0.25):
+    def __init__(self, embedding_dim: int = 512, width_mult: float = 0.18):
         super().__init__()
 
         filters = [32, 64, 128, 256, 512, 1024]

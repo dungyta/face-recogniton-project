@@ -1,0 +1,2 @@
+Model,Num_Params,Size_MB,RAM_Model_MB,RAM_Peak_MB,Latency_Avg_ms,Latency_Min_ms,Latency_Max_ms,Latency_Std_ms,FLOPs,LFW_%,CALFW_%,CPLFW_%,AgeDB_30_%,Avg_Acc_%,Efficiency_Score
+mobilenetv1_018,224856,0.87,11.4,13.4,1.22,1.07,2.60,0.23,437088,94.48,82.02,73.01,79.79,82.33,80.82
