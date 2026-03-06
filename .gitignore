@@ -1,8 +1,16 @@
+iomages/
 data/
 archive/
 archive.zip
 weights/*.ckpt
 weights/*.pth
+assets/
+weights/
+*.onnx
+*.pth
+*.pt
+.vscode/
+.history/
 
 
 # Byte-compiled / optimized / DLL files
