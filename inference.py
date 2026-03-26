@@ -44,6 +44,7 @@ def get_network(model_name: str) -> torch.nn.Module:
         "mobilenetv3_small": mobilenet_v3_small(embedding_dim=512),
         "mobilenetv3_large": mobilenet_v3_large(embedding_dim=512),
         "mobilenetv2_025": MobileNetV2(embedding_dim=512, width_mult=0.25),
+        "mobilenetv1_040": MobileNetV1(embedding_dim=512, width_mult=0.4),
         
     }
 
@@ -141,9 +142,9 @@ def compare_faces(model, device, img1_path: str, img2_path: str, threshold: floa
 if __name__ == "__main__":
     # Example usage with model selection
     # model_name = "mobilenetv1_050"  # Change this to select different models
-    model_name = "sphere36"
-    model_path = "/home/dun/face-recognition/weights/sphere36_mcp.pth"
-    threshold = 0.2255
+    model_name = "mobilenetv1_040"  # Change this to select different models
+    model_path = "/home/dun/FACE-RECOGNITION/face-recognition/weights/mobilenetv1_040.pth"
+    threshold = 0.27
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -153,8 +154,8 @@ if __name__ == "__main__":
     # Compare faces
     similarity, is_same = compare_faces(
         model, device,
-        img1_path="assets/f_03.png",
-        img2_path="assets/d_02.png",
+        img1_path="/home/dun/Desktop/test_anh/hyun_bin.png",
+        img2_path="/home/dun/FACE-RECOGNITION/NNE_V1.0.05/nne_compile_tool/DataSet/database_image/Ji Chang Wook/9.jpg",
         threshold=threshold
     )
 

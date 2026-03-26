@@ -176,16 +176,20 @@ class LinearBlock(nn.Module):
 class GDC(nn.Module):
     def __init__(self, in_channels, embedding_dim):
         super().__init__()
-        self.features = nn.Sequential(
-            LinearBlock(in_channels, in_channels, kernel_size=7, stride=1, padding=0, groups=in_channels),
-            nn.Flatten()
-        )
+        # self.features = nn.Sequential(
+        #     LinearBlock(in_channels, in_channels, kernel_size=7, stride=1, padding=0, groups=in_channels),
+        #     nn.Flatten()
+        # )
+        #Global Average Pooling
+        self.avgpool = nn.AdaptiveAvgPool2d(1)
         self.fc = nn.Sequential(
             nn.Linear(in_channels, embedding_dim, bias=False),
             nn.BatchNorm1d(embedding_dim)
         )
+        
 
     def forward(self, x):
-        x = self.features(x)
+        x = self.avgpool(x)
+        x = x.reshape(x.size(0), -1)
         x = self.fc(x)
         return x

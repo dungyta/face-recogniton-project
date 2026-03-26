@@ -31,6 +31,16 @@ def get_network(params):
         model = mobilenet_v3_large(embedding_dim=512)
     elif params.network == "mobilenetv2_025":
         model = MobileNetV2(embedding_dim=512, width_mult=0.25)
+    elif params.network == "mobilenetv1_050":
+        model = MobileNetV1(embedding_dim=512, width_mult=0.5)
+    elif params.network == "mobilenetv1_025":   
+        model = MobileNetV1(embedding_dim=512, width_mult=0.25)     
+    elif params.network == "mobilenetv1_018":
+        model = MobileNetV1(embedding_dim=512, width_mult=0.18)
+    elif params.network == "mobilenetv1_100":
+        model = MobileNetV1(embedding_dim=512, width_mult=1.0)
+    elif params.network == "mobilenetv1_040":
+        model = MobileNetV1(embedding_dim=512, width_mult=0.4)
     else:
         raise ValueError("Unsupported network!")
 
@@ -42,7 +52,7 @@ def parse_arguments():
 
     parser.add_argument(
         '-w', '--weights',
-        default='./weights/mobilenetv2_mcp.pth',
+        default='/home/dun/FACE-RECOGNITION/face-recognition/weights/mobilenetv1_040.pth',
         type=str,
         help='Trained state_dict file path to open'
     )
@@ -54,7 +64,8 @@ def parse_arguments():
             'mobilenetv1', 'mobilenetv1_0.25', 'mobilenetv1_0.50',
             'mobilenetv2', 'mobilenetv3_small', 'mobilenetv3_large',
             'sphere20', 'sphere36', 'sphere64',
-            'resnet50', 'resnet34', 'resnet18', 'mobilenetv2_025'
+            'resnet50', 'resnet34', 'resnet18', 'mobilenetv2_025', 'mobilenetv1_025', 'mobilenetv1_018',
+            'mobilenetv1_100', "mobilenetv1_040"
         ],
         help='Backbone network architecture to use'
     )

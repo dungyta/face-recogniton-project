@@ -4,11 +4,11 @@ from typing import List, Optional, Callable
 
 from utils.layers import _make_divisible, Conv2dNormActivation, DepthWiseSeparableConv2d, GDC
 
-__all__ = ["mobilenet_v1_025", "mobilenet_v1_050", "mobilenet_v1"]
+__all__ = ["mobilenet_v1_025", "mobilenet_v1_050", "mobilenet_v1", "mobilenet_v1_040"]
 
 
 class MobileNetV1(nn.Module):
-    def __init__(self, embedding_dim: int = 512, width_mult: float = 0.18):
+    def __init__(self, embedding_dim: int = 512, width_mult: float = 0.4) -> None:
         super().__init__()
 
         filters = [32, 64, 128, 256, 512, 1024]
